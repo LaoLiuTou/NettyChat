@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+ 	<constant name="struts.objectFactory" value="spring"></constant>
+	<constant name="struts.action.excludePattern" value="/services,/services/.*,/FileUpLoad" />
+	<package name="Chatfriend" namespace="/"  extends="struts-default">
+		<action name="*Chatfriend" class="com.nettychat.action.chatfriend.ChatfriendAction" method="{1}">
+			<result name="add" type="redirect">/listChatfriend.action?page=1</result>
+			<result name="select">/pages/chatfriend/chatfriendDetails.jsp</result>
+			<result name="delete" type="redirect">/listChatfriend.action?page=1</result>
+			<result name="update" type="redirect">/listChatfriend.action?page=1</result>
+			<result name="list">/pages/chatfriend/chatfriendList.jsp</result>
+		</action>
+	</package>
+	
+	<package name="Chatgroup" namespace="/"  extends="struts-default">
+		<action name="*Chatgroup" class="com.nettychat.action.chatgroup.ChatgroupAction" method="{1}">
+			<result name="add" type="redirect">/listChatgroup.action?page=1</result>
+			<result name="select">/pages/chatgroup/chatgroupDetails.jsp</result>
+			<result name="delete" type="redirect">/listChatgroup.action?page=1</result>
+			<result name="update" type="redirect">/listChatgroup.action?page=1</result>
+			<result name="list">/pages/chatgroup/chatgroupList.jsp</result>
+		</action>
+	</package>
+	<package name="Chatmessage" namespace="/"  extends="struts-default">
+		<action name="*Chatmessage" class="com.nettychat.action.chatmessage.ChatmessageAction" method="{1}">
+			<result name="add" type="redirect">/listChatmessage.action?page=1</result>
+			<result name="select">/pages/chatmessage/chatmessageDetails.jsp</result>
+			<result name="delete" type="redirect">/listChatmessage.action?page=1</result>
+			<result name="update" type="redirect">/listChatmessage.action?page=1</result>
+			<result name="list">/pages/chatmessage/chatmessageList.jsp</result>
+		</action>
+	</package>
+	<package name="Chatuser" namespace="/"  extends="struts-default">
+		<action name="*Chatuser" class="com.nettychat.action.chatuser.ChatuserAction" method="{1}">
+			<result name="add" type="redirect">/listChatuser.action?page=1</result>
+			<result name="select">/pages/chatuser/chatuserDetails.jsp</result>
+			<result name="delete" type="redirect">/listChatuser.action?page=1</result>
+			<result name="update" type="redirect">/listChatuser.action?page=1</result>
+			<result name="list">/pages/chatuser/chatuserList.jsp</result>
+		</action>
+	</package>
+	<package name="Groupuser" namespace="/"  extends="struts-default">
+		<action name="*Groupuser" class="com.nettychat.action.groupuser.GroupuserAction" method="{1}">
+			<result name="add" type="redirect">/listGroupuser.action?page=1</result>
+			<result name="select">/pages/groupuser/groupuserDetails.jsp</result>
+			<result name="delete" type="redirect">/listGroupuser.action?page=1</result>
+			<result name="update" type="redirect">/listGroupuser.action?page=1</result>
+			<result name="list">/pages/groupuser/groupuserList.jsp</result>
+		</action>
+	</package>
+	<package name="PushServer" namespace="/"  extends="struts-default">
+		<action name="PushServer" class="com.nettychat.action.chat.PushServerAction" >
+			 
+		</action>
+	</package>
+	<package name="GroupServer" namespace="/"  extends="struts-default">
+		<action name="GroupServer" class="com.nettychat.action.chat.GroupServerAction" >
+			 
+		</action>
+	</package>
+	<package name="LiveServer" namespace="/"  extends="struts-default">
+		<action name="LiveServer" class="com.nettychat.action.chat.LiveServerAction" >
+			 
+		</action>
+	</package>
+	<package name="Messagebackup" namespace="/"  extends="struts-default">
+		<action name="*Messagebackup" class="com.nettychat.action.messagebackup.MessagebackupAction" method="{1}">
+			<result name="add" type="redirect">/listMessagebackup.action?page=1</result>
+			<result name="select">/pages/messagebackup/messagebackupDetails.jsp</result>
+			<result name="delete" type="redirect">/listMessagebackup.action?page=1</result>
+			<result name="update" type="redirect">/listMessagebackup.action?page=1</result>
+			<result name="list">/pages/messagebackup/messagebackupList.jsp</result>
+		</action>
+	</package>
+</struts>

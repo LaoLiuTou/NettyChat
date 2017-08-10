@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="chatgroup">
+	<typeAlias alias="chatgroup" type="com.nettychat.model.chatgroup.Chatgroup" />
+
+	<select id="selectchatgroupById" parameterClass="String" resultClass="Chatgroup">
+		SELECT * FROM chatgroup WHERE ID=#id#
+	</select>
+
+
+	<delete id="deletechatgroup" parameterClass="String"> 
+		DELETE FROM chatgroup WHERE ID=#id#
+	</delete>
+
+	<select id="selectchatgroupByParam" parameterClass="java.util.Map" resultClass="Chatgroup">
+		SELECT *
+		FROM chatgroup
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID =#id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="groupid"> GROUPID =#groupid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="groupname"> GROUPNAME =#groupname# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="adduserid"> ADDUSERID =#adduserid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="groupimage"> GROUPIMAGE =#groupimage# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="groupdetail"> GROUPDETAIL =#groupdetail# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtimeFrom"> ADDTIME &gt;=#addtimeFrom# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtimeTo"> ADDTIME &lt;=#addtimeTo# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtime"> ADDTIME =#addtime# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="flag"> FLAG =#flag# </isNotEmpty>
+		</dynamic> 
+		ORDER BY ID DESC 
+		LIMIT #fromPage#,#toPage# 
+	</select>
+
+	<select id="selectCountchatgroupByParam" parameterClass="java.util.Map" resultClass="int">
+		SELECT COUNT(id) 
+		FROM chatgroup 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID =#id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="groupid"> GROUPID =#groupid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="groupname"> GROUPNAME =#groupname# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="adduserid"> ADDUSERID =#adduserid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="groupimage"> GROUPIMAGE =#groupimage# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="groupdetail"> GROUPDETAIL =#groupdetail# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtimeFrom"> ADDTIME &gt;=#addtimeFrom# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtimeTo"> ADDTIME &lt;=#addtimeTo# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtime"> ADDTIME =#addtime# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="flag"> FLAG =#flag# </isNotEmpty>
+		</dynamic> 
+	</select>
+
+	<update id="updatechatgroup" parameterClass="Chatgroup">
+		UPDATE chatgroup 
+		<dynamic prepend="SET">
+			<isNotEmpty prepend="," property="id"> ID=#id# </isNotEmpty>
+			<isNotEmpty prepend="," property="groupid"> GROUPID=#groupid# </isNotEmpty>
+			<isNotEmpty prepend="," property="groupname"> GROUPNAME=#groupname# </isNotEmpty>
+			<isNotEmpty prepend="," property="adduserid"> ADDUSERID=#adduserid# </isNotEmpty>
+			<isNotEmpty prepend="," property="groupimage"> GROUPIMAGE=#groupimage# </isNotEmpty>
+			<isNotEmpty prepend="," property="groupdetail"> GROUPDETAIL=#groupdetail# </isNotEmpty>
+			<isNotEmpty prepend="," property="addtime"> ADDTIME=#addtime# </isNotEmpty>
+			<isNotEmpty prepend="," property="flag"> FLAG=#flag# </isNotEmpty>
+		</dynamic>
+		WHERE ID=#id#
+	</update>
+
+	<insert id="addchatgroup" parameterClass="Chatgroup">
+		INSERT INTO chatgroup (
+		<dynamic prepend=" ">
+			<isNotEmpty property="groupid" prepend=","> GROUPID </isNotEmpty>
+			<isNotEmpty property="groupname" prepend=","> GROUPNAME </isNotEmpty>
+			<isNotEmpty property="adduserid" prepend=","> ADDUSERID </isNotEmpty>
+			<isNotEmpty property="groupimage" prepend=","> GROUPIMAGE </isNotEmpty>
+			<isNotEmpty property="groupdetail" prepend=","> GROUPDETAIL </isNotEmpty>
+			<isNotEmpty property="addtime" prepend=","> ADDTIME </isNotEmpty>
+			<isNotEmpty property="flag" prepend=","> FLAG </isNotEmpty>
+		</dynamic>
+		<![CDATA[
+		) VALUES (		]]>
+		<dynamic prepend=" ">
+			<isNotEmpty property="groupid" prepend=","> #groupid# </isNotEmpty>
+			<isNotEmpty property="groupname" prepend=","> #groupname# </isNotEmpty>
+			<isNotEmpty property="adduserid" prepend=","> #adduserid# </isNotEmpty>
+			<isNotEmpty property="groupimage" prepend=","> #groupimage# </isNotEmpty>
+			<isNotEmpty property="groupdetail" prepend=","> #groupdetail# </isNotEmpty>
+			<isNotEmpty property="addtime" prepend=","> #addtime# </isNotEmpty>
+			<isNotEmpty property="flag" prepend=","> #flag# </isNotEmpty>
+		</dynamic>
+		<![CDATA[  ) ]]>
+		<selectKey resultClass="long" keyProperty="id" > 
+			SELECT LAST_INSERT_ID()
+		</selectKey> 
+	</insert>
+</sqlMap>

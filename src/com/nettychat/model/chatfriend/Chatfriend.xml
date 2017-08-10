@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="chatfriend">
+	<typeAlias alias="chatfriend" type="com.nettychat.model.chatfriend.Chatfriend" />
+
+	<select id="selectchatfriendById" parameterClass="String" resultClass="Chatfriend">
+		SELECT * FROM chatfriend WHERE FRIENDID=#friendid#
+	</select>
+
+
+	<delete id="deletechatfriend" parameterClass="String"> 
+		DELETE FROM chatfriend WHERE FRIENDID=#friendid#
+	</delete>
+
+	<select id="selectchatfriendByParam" parameterClass="java.util.Map" resultClass="Chatfriend">
+		SELECT *
+		FROM chatfriend
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID =#id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="userid"> USERID =#userid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="friendid"> FRIENDID =#friendid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="isgroup"> ISGROUP =#isgroup# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="isonline"> ISONLINE =#isonline# </isNotEmpty>
+		</dynamic> 
+		ORDER BY ID DESC 
+		LIMIT #fromPage#,#toPage# 
+	</select>
+
+	<select id="selectCountchatfriendByParam" parameterClass="java.util.Map" resultClass="int">
+		SELECT COUNT(id) 
+		FROM chatfriend 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID =#id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="userid"> USERID =#userid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="friendid"> FRIENDID =#friendid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="isgroup"> ISGROUP =#isgroup# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="isonline"> ISONLINE =#isonline# </isNotEmpty>
+		</dynamic> 
+	</select>
+
+	<update id="updatechatfriend" parameterClass="Chatfriend">
+		UPDATE chatfriend 
+		<dynamic prepend="SET">
+			<isNotEmpty prepend="," property="id"> ID=#id# </isNotEmpty>
+			<isNotEmpty prepend="," property="userid"> USERID=#userid# </isNotEmpty>
+			<isNotEmpty prepend="," property="friendid"> FRIENDID=#friendid# </isNotEmpty>
+			<isNotEmpty prepend="," property="isgroup"> ISGROUP=#isgroup# </isNotEmpty>
+			<isNotEmpty prepend="," property="isonline"> ISONLINE=#isonline# </isNotEmpty>
+		</dynamic>
+		WHERE FRIENDID=#friendid#
+	</update>
+
+	<insert id="addchatfriend" parameterClass="Chatfriend">
+		INSERT INTO chatfriend (
+		<dynamic prepend=" ">
+			<isNotEmpty property="userid" prepend=","> USERID </isNotEmpty>
+			<isNotEmpty property="friendid" prepend=","> FRIENDID </isNotEmpty>
+			<isNotEmpty property="isgroup" prepend=","> ISGROUP </isNotEmpty>
+			<isNotEmpty property="isonline" prepend=","> ISONLINE </isNotEmpty>
+		</dynamic>
+		<![CDATA[
+		) VALUES (		]]>
+		<dynamic prepend=" ">
+			<isNotEmpty property="userid" prepend=","> #userid# </isNotEmpty>
+			<isNotEmpty property="friendid" prepend=","> #friendid# </isNotEmpty>
+			<isNotEmpty property="isgroup" prepend=","> #isgroup# </isNotEmpty>
+			<isNotEmpty property="isonline" prepend=","> #isonline# </isNotEmpty>
+		</dynamic>
+		<![CDATA[  ) ]]>
+		<selectKey resultClass="long" keyProperty="id" > 
+			SELECT LAST_INSERT_ID()
+		</selectKey> 
+	</insert>
+</sqlMap>

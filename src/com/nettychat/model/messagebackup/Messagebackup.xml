@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="messagebackup">
+	<typeAlias alias="messagebackup" type="com.nettychat.model.messagebackup.Messagebackup" />
+
+	<select id="selectmessagebackupById" parameterClass="String" resultClass="Messagebackup">
+		SELECT * FROM messagebackup WHERE ID=#id#
+	</select>
+
+
+	<delete id="deletemessagebackup" parameterClass="String"> 
+		DELETE FROM messagebackup WHERE ID=#id#
+	</delete>
+
+	<select id="selectmessagebackupByParam" parameterClass="java.util.Map" resultClass="Messagebackup">
+		SELECT *
+		FROM messagebackup
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID =#id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="userid"> USERID =#userid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="friendid"> FRIENDID =#friendid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtimeFrom"> ADDTIME &gt;=#addtimeFrom# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtimeTo"> ADDTIME &lt;=#addtimeTo# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtime"> ADDTIME =#addtime# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="chattype"> CHATTYPE =#chattype# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="contenttype"> CONTENTTYPE =#contenttype# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="content"> CONTENT =#content# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="readstatus"> READSTATUS =#readstatus# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="sendstatus"> SENDSTATUS =#sendstatus# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="isgroup"> ISGROUP =#isgroup# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="flag"> FLAG =#flag# </isNotEmpty>
+		</dynamic> 
+		ORDER BY ID DESC 
+		LIMIT #fromPage#,#toPage# 
+	</select>
+
+	<select id="selectCountmessagebackupByParam" parameterClass="java.util.Map" resultClass="int">
+		SELECT COUNT(id) 
+		FROM messagebackup 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID =#id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="userid"> USERID =#userid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="friendid"> FRIENDID =#friendid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtimeFrom"> ADDTIME &gt;=#addtimeFrom# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtimeTo"> ADDTIME &lt;=#addtimeTo# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="addtime"> ADDTIME =#addtime# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="chattype"> CHATTYPE =#chattype# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="contenttype"> CONTENTTYPE =#contenttype# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="content"> CONTENT =#content# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="readstatus"> READSTATUS =#readstatus# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="sendstatus"> SENDSTATUS =#sendstatus# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="isgroup"> ISGROUP =#isgroup# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="flag"> FLAG =#flag# </isNotEmpty>
+		</dynamic> 
+	</select>
+
+	<update id="updatemessagebackup" parameterClass="Messagebackup">
+		UPDATE messagebackup 
+		<dynamic prepend="SET">
+			<isNotEmpty prepend="," property="id"> ID=#id# </isNotEmpty>
+			<isNotEmpty prepend="," property="userid"> USERID=#userid# </isNotEmpty>
+			<isNotEmpty prepend="," property="friendid"> FRIENDID=#friendid# </isNotEmpty>
+			<isNotEmpty prepend="," property="addtime"> ADDTIME=#addtime# </isNotEmpty>
+			<isNotEmpty prepend="," property="chattype"> CHATTYPE=#chattype# </isNotEmpty>
+			<isNotEmpty prepend="," property="contenttype"> CONTENTTYPE=#contenttype# </isNotEmpty>
+			<isNotEmpty prepend="," property="content"> CONTENT=#content# </isNotEmpty>
+			<isNotEmpty prepend="," property="readstatus"> READSTATUS=#readstatus# </isNotEmpty>
+			<isNotEmpty prepend="," property="sendstatus"> SENDSTATUS=#sendstatus# </isNotEmpty>
+			<isNotEmpty prepend="," property="isgroup"> ISGROUP=#isgroup# </isNotEmpty>
+			<isNotEmpty prepend="," property="flag"> FLAG=#flag# </isNotEmpty>
+		</dynamic>
+		WHERE ID=#id#
+	</update>
+
+	<insert id="addmessagebackup" parameterClass="Messagebackup">
+		INSERT INTO messagebackup (
+		<dynamic prepend=" ">
+			<isNotEmpty property="userid" prepend=","> USERID </isNotEmpty>
+			<isNotEmpty property="friendid" prepend=","> FRIENDID </isNotEmpty>
+			<isNotEmpty property="addtime" prepend=","> ADDTIME </isNotEmpty>
+			<isNotEmpty property="chattype" prepend=","> CHATTYPE </isNotEmpty>
+			<isNotEmpty property="contenttype" prepend=","> CONTENTTYPE </isNotEmpty>
+			<isNotEmpty property="content" prepend=","> CONTENT </isNotEmpty>
+			<isNotEmpty property="readstatus" prepend=","> READSTATUS </isNotEmpty>
+			<isNotEmpty property="sendstatus" prepend=","> SENDSTATUS </isNotEmpty>
+			<isNotEmpty property="isgroup" prepend=","> ISGROUP </isNotEmpty>
+			<isNotEmpty property="flag" prepend=","> FLAG </isNotEmpty>
+		</dynamic>
+		<![CDATA[
+		) VALUES (		]]>
+		<dynamic prepend=" ">
+			<isNotEmpty property="userid" prepend=","> #userid# </isNotEmpty>
+			<isNotEmpty property="friendid" prepend=","> #friendid# </isNotEmpty>
+			<isNotEmpty property="addtime" prepend=","> #addtime# </isNotEmpty>
+			<isNotEmpty property="chattype" prepend=","> #chattype# </isNotEmpty>
+			<isNotEmpty property="contenttype" prepend=","> #contenttype# </isNotEmpty>
+			<isNotEmpty property="content" prepend=","> #content# </isNotEmpty>
+			<isNotEmpty property="readstatus" prepend=","> #readstatus# </isNotEmpty>
+			<isNotEmpty property="sendstatus" prepend=","> #sendstatus# </isNotEmpty>
+			<isNotEmpty property="isgroup" prepend=","> #isgroup# </isNotEmpty>
+			<isNotEmpty property="flag" prepend=","> #flag# </isNotEmpty>
+		</dynamic>
+		<![CDATA[  ) ]]>
+		<selectKey resultClass="long" keyProperty="id" > 
+			SELECT LAST_INSERT_ID()
+		</selectKey> 
+	</insert>
+</sqlMap>

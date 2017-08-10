@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans >
+	<service xmlns="http://xfire.codehaus.org/config/1.0">
+		<name>ChatgroupWS</name>
+		<serviceClass>com.nettychat.webService.chatgroup.IChatgroupWS</serviceClass>
+		<implementationClass>
+			com.nettychat.webService.chatgroup.ChatgroupWSImpl
+		</implementationClass>
+		<style>wrapped</style>
+		<use>literal</use>
+		<scope>application</scope>
+	</service>
+	<service xmlns="http://xfire.codehaus.org/config/1.0">
+		<name>ChatmessageWS</name>
+		<serviceClass>com.nettychat.webService.chatmessage.IChatmessageWS</serviceClass>
+		<implementationClass>
+			com.nettychat.webService.chatmessage.ChatmessageWSImpl
+		</implementationClass>
+		<style>wrapped</style>
+		<use>literal</use>
+		<scope>application</scope>
+	</service>
+	<service xmlns="http://xfire.codehaus.org/config/1.0">
+		<name>ChatuserWS</name>
+		<serviceClass>com.nettychat.webService.chatuser.IChatuserWS</serviceClass>
+		<implementationClass>
+			com.nettychat.webService.chatuser.ChatuserWSImpl
+		</implementationClass>
+		<style>wrapped</style>
+		<use>literal</use>
+		<scope>application</scope>
+	</service>
+	<service xmlns="http://xfire.codehaus.org/config/1.0">
+		<name>GroupuserWS</name>
+		<serviceClass>com.nettychat.webService.groupuser.IGroupuserWS</serviceClass>
+		<implementationClass>
+			com.nettychat.webService.groupuser.GroupuserWSImpl
+		</implementationClass>
+		<style>wrapped</style>
+		<use>literal</use>
+		<scope>application</scope>
+	</service>
+</beans>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="NettyChat"
+  id="myeclipse.1413159514515"
+  context-root="/NettyChat"
+  j2ee-spec="5.0"
+  archive="NettyChat.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

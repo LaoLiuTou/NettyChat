@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="groupuser">
+	<typeAlias alias="groupuser" type="com.nettychat.model.groupuser.Groupuser" />
+
+	<select id="selectgroupuserById" parameterClass="String" resultClass="Groupuser">
+		SELECT * FROM groupuser WHERE ID=#id#
+	</select>
+
+
+	<delete id="deletegroupuser" parameterClass="String"> 
+		DELETE FROM groupuser WHERE ID=#id#
+	</delete>
+
+	<select id="selectgroupuserByParam" parameterClass="java.util.Map" resultClass="Groupuser">
+		SELECT *
+		FROM groupuser
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID =#id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="groupid"> GROUPID =#groupid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="userid"> USERID =#userid# </isNotEmpty>
+		</dynamic> 
+		ORDER BY ID DESC 
+		LIMIT #fromPage#,#toPage# 
+	</select>
+
+	<select id="selectCountgroupuserByParam" parameterClass="java.util.Map" resultClass="int">
+		SELECT COUNT(id) 
+		FROM groupuser 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="id"> ID =#id# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="groupid"> GROUPID =#groupid# </isNotEmpty>
+			<isNotEmpty prepend="AND" property="userid"> USERID =#userid# </isNotEmpty>
+		</dynamic> 
+	</select>
+
+	<update id="updategroupuser" parameterClass="Groupuser">
+		UPDATE groupuser 
+		<dynamic prepend="SET">
+			<isNotEmpty prepend="," property="id"> ID=#id# </isNotEmpty>
+			<isNotEmpty prepend="," property="groupid"> GROUPID=#groupid# </isNotEmpty>
+			<isNotEmpty prepend="," property="userid"> USERID=#userid# </isNotEmpty>
+		</dynamic>
+		WHERE ID=#id#
+	</update>
+
+	<insert id="addgroupuser" parameterClass="Groupuser">
+		INSERT INTO groupuser (
+		<dynamic prepend=" ">
+			<isNotEmpty property="groupid" prepend=","> GROUPID </isNotEmpty>
+			<isNotEmpty property="userid" prepend=","> USERID </isNotEmpty>
+		</dynamic>
+		<![CDATA[
+		) VALUES (		]]>
+		<dynamic prepend=" ">
+			<isNotEmpty property="groupid" prepend=","> #groupid# </isNotEmpty>
+			<isNotEmpty property="userid" prepend=","> #userid# </isNotEmpty>
+		</dynamic>
+		<![CDATA[  ) ]]>
+		<selectKey resultClass="long" keyProperty="id" > 
+			SELECT LAST_INSERT_ID()
+		</selectKey> 
+	</insert>
+</sqlMap>
