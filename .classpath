@@ -74,5 +74,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/netty-all-4.1.13.Final-sources.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/netty-all-4.1.13.Final.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jedis-2.1.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpclient-4.5.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpcore-4.4.6.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

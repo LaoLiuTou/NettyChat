@@ -193,7 +193,7 @@ public class SocketServerHandler extends CustomHeartbeatHandler {
 				logger.info("用户退出，ID:"+map.get("UI")+"；用户名："+map.get("UN"));
 			}
 			else if(map.get("T").equals("3")||map.get("T").equals("7")||map.get("T").equals("8")
-					||map.get("T").equals("9")){//text message
+					||map.get("T").equals("9")||map.get("T").equals("10")){//text message
 				
 				//判断消息类型  查询group中的用户信息 循环发送消息
 				
@@ -213,6 +213,9 @@ public class SocketServerHandler extends CustomHeartbeatHandler {
 					}
 					//redis 中是否有记录
 					if(address== null){
+						if(map.get("T").equals("10")){
+							return;
+						}
 						
 						Chatuser chatuser = iChatuserService.selectchatuserById(map.get("FI"));
 						if(chatuser!=null&& chatuser.getFlag()!=null&&chatuser.getFlag().equals("1")){//ios

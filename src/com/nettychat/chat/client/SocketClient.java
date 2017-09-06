@@ -72,8 +72,8 @@ public class SocketClient {
             os.write(bi);  
             os.flush();  
              
-          //{"T":"3","UI":"101","FI":"100","UN":"XX","CT":"5b6X562J5Yiw","TP":"1","HI":""}
-           //{"T":"1","UN":"张1","UI":"101","UH":""}
+          //{"T":"10","UI":"101","FI":"102","UN":"XX","CT":"5b6X562J5Yiw","TP":"1","HI":""}
+           //{"T":"1","UN":"张1","UI":"102","UH":""}
             boolean isconnect= true;
             while (isconnect) {
            	 int rbsize = input.available();

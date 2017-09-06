@@ -175,7 +175,7 @@ public class PushServerAction implements Action {
 						}
 						else{
 							timer.schedule(new SendTask(key), 1000);  
-						}
+						} 
 					}
 					else if(operate!=null&&operate.equals("1")){
 						Timer tempTimer=timerMap.get(key);
