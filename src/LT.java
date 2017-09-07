@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
@@ -22,15 +23,24 @@ public class LT {
 		// TODO Auto-generated method stub
 	 
 		
+		/*String delay =null ;
+		
+		//System.out.println(Long.parseLong(delay));
+		
+		Timer timer = new Timer(true);  
+		if(delay!=null&&!delay.equals("")&&Long.parseLong(delay)>0){
+			timer.schedule(new SendTask(), Long.parseLong(delay));  
+		}*/
 		String url = "http://192.168.1.144/NettyChat/PushServer";
+		
 		
 		try {
 			 
-			for(int i=0;i<100;i++){
+			for(int i=0;i<1;i++){
 				List<NameValuePair> params= new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("userid", "552"));    
 				params.add(new BasicNameValuePair("friendid", "1|2|3|4|5|6|7|8|9|10"));    
-				params.add(new BasicNameValuePair("delay", "1000"));    
+				params.add(new BasicNameValuePair("delay", "0"));    
 				params.add(new BasicNameValuePair("username", "username"));    
 				params.add(new BasicNameValuePair("headimage", ""));    
 				params.add(new BasicNameValuePair("type", "1"));   
@@ -43,9 +53,27 @@ public class LT {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		 
 	}
+	
+	static class SendTask extends TimerTask {  
+		  
+		 
+		@Override  
+	    public void run() {  
+	        System.out.println("ccc");
+	  
+	    }  
+	  
+	}  
+	
+	
+	
+	
+	
+	
+	
 	private static CloseableHttpClient httpclient;
     private static RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000).build();
 	 /**
@@ -86,3 +114,5 @@ public class LT {
     }
 
 }
+
+

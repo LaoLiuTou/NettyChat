@@ -170,7 +170,7 @@ public class PushServerAction implements Action {
 						//////新建定时任务
 						timer = new Timer(true); 
 						timerMap.put(key, timer);
-						if(delay!=null&&!delay.equals("")&&!delay.equals("0")){
+						if(delay!=null&&!delay.equals("")&&Long.parseLong(delay)>0){
 							timer.schedule(new SendTask(key), Long.parseLong(delay));  
 						}
 						else{
@@ -187,7 +187,7 @@ public class PushServerAction implements Action {
 						//////新建定时任务
 						timer = new Timer(true); 
 						timerMap.put(key, timer);
-						if(delay!=null&&!delay.equals("")){
+						if(delay!=null&&!delay.equals("")&&Long.parseLong(delay)>0){
 							timer.schedule(new SendTask(key), Long.parseLong(delay));  
 						}
 						else{
@@ -232,12 +232,14 @@ public class PushServerAction implements Action {
 			
 		} catch (Exception e) {
 			msg.append("\"failure\",\"msg\":");
+			message="操作失败！";
+			timerMap.remove(key);
 			// TODO: handle exception
 			e.printStackTrace();
 		} 
 		msg.append("\""+message+"\"");
 		msg.append("}");
-		logger.info("收到推送消息，KEY:"+key+"发送者："+userid+";接收者："+friendid+"；内容："+content+"延迟发送时间："+delay+"操作类型："+operate);
+		logger.info("收到推送消息，KEY:"+key+"发送者："+userid+";接收者："+friendid+";"+"延迟发送时间："+delay+";操作类型："+operate);
 		response.getWriter().write(msg.toString()); 
 		return null;
 	}

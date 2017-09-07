@@ -72,7 +72,7 @@ public class SocketServerHandler extends CustomHeartbeatHandler {
 			buf.readBytes(data);
 			String content = new String(data);*/
 			String content = string;
-			System.out.println(content);
+			//System.out.println(content);
 			//
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String, String> map = new HashMap<String, String>(); 
