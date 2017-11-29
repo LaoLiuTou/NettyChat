@@ -1,12 +1,14 @@
 package com.nettychat.action.chat;
 
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -255,7 +257,11 @@ public class LiveServerAction implements Action {
 	    public void run() {  
 	        try {
 	        	 System.out.println("taskKey:"+taskKey);
-	         
+	        	 
+	        	 Properties props = new Properties(); 
+			        props.load(RedisUtil.class.getClassLoader().getResourceAsStream("socket/socket.properties"));
+			        String  nettype=props.getProperty("nettype").trim();
+			        
 	        	String[] friendids = friendid.split("\\|",-1);
 	        	
 				for(String friend:friendids){
@@ -283,7 +289,12 @@ public class LiveServerAction implements Action {
 							System.out.println("on_line");
 							
 							String content = json;
-							channelHandlerContext.writeAndFlush(content);
+						    if(nettype.equals("socket")){
+					        	   channelHandlerContext.writeAndFlush(content);
+					          }
+					          else if(nettype.equals("websocket")){
+					               channelHandlerContext.writeAndFlush(new TextWebSocketFrame(content));
+					          }
 							//保存在线消息
 							saveOnlineMessage(paramMap);
 							

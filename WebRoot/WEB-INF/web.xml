@@ -23,6 +23,18 @@
    <listener>
   <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  
+    <filter>
+    <filter-name>StrutsPrepareAndExecuteFilter</filter-name>
+    <filter-class>com.nettychat.utils.EncryptFilter</filter-class>
+  </filter>
+  <filter-mapping>  
+  <filter-name>StrutsPrepareAndExecuteFilter</filter-name>  
+  <url-pattern>/*</url-pattern>  
+  <dispatcher>REQUEST</dispatcher>  
+  <dispatcher>FORWARD</dispatcher>  
+ </filter-mapping> 
+  
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
